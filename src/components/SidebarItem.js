@@ -7,6 +7,18 @@ const Outer = styled.div`
   font-size: 14px;
   background: white;
   cursor: move;
+  text-transform:capitalize;
+  border:none;
+  font-weight:550;
+  margin-top:1px;
+  &:hover {
+    background:#555;
+    transition: all 0.5s ease-in-out;
+    transition-property: transform, background;
+    border-radius:8px;
+    border:none;
+    color:white;
+  }
 `;
 
 export const SidebarItem = ({ type, ports, properties }) => {

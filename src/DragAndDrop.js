@@ -72,7 +72,7 @@ const Circle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #d30000;
+  background: #555;
   color: white;
   border-radius: 50%;
   ${props =>
@@ -86,17 +86,19 @@ const Circle = styled.div`
 const DarkBox = styled.div`
   position: absolute;
   padding: 30px;
-  background: #3e3e3e;
+  background: #555;
   color: white;
   border-radius: 10px;
-  min-width:200px;
+  min-width: 200px;
+  justify-content: center;
+  display: flex;
   ${props =>
     props.isSelected &&
     css`
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
       margin-top: -2px;
     `};
-`
+`;
 
 const PortList = ({ onMount }) => <div>{onMount()}</div>;
 
@@ -120,10 +122,7 @@ const CustomNode = React.forwardRef(
 const NodeInner = ({ node, ...otherProps }) => {
   const { type, ...rest } = node;
   let json = null;
-  if (
-    type === NODE.CONDITION &&
-    rest.condition
-  ) {
+  if (type === NODE.CONDITION && rest.condition) {
     json = rest.condition;
   } else if (rest.fields) {
     json = rest.fields;
@@ -308,13 +307,18 @@ const Field = props => {
   else if (item.type === "radio")
     return (
       <React.Fragment>
-        <RadioGroup
-          id={name}
-          selected={value}
-          options={item.options}
-          onChange={({ target: { name, value } }) => onChange(value, name)}
-          name={name}
-        />
+        <div className="form-group">
+        <Label htmlFor={name} className="material-label">
+            {item.label}
+        </Label>
+          <RadioGroup
+            id={name}
+            selected={value}
+            options={item.options}
+            onChange={({ target: { name, value } }) => onChange(value, name)}
+            name={name}
+          />
+        </div>
       </React.Fragment>
     );
   return "Field Not Implemented";
@@ -346,7 +350,7 @@ const RenderFlowFields = ({ flowFields }) => {
 
 const NodeFields = props => {
   const { node } = props;
-  if(!node) return "";
+  if (!node) return "";
   const {
     properties: { type }
   } = node;

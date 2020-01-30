@@ -199,6 +199,10 @@ class ConvasProvider extends React.Component {
   }
 
   render() {
+    const {listener} = this.props;
+    if(listener instanceof Function){
+      listener(this.state) // pass the state to the listener
+    }
     return (
       <CanvasContext.Provider
         value={{

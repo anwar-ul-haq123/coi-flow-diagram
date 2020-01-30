@@ -76,7 +76,9 @@ export const onLinkComplete = props => {
 };
 
 export const onLinkCancel = ({ linkId }) => chart => {
+  console.log("ON Link Cancel");
   delete chart.links[linkId];
+  console.log({chart})
   return chart;
 };
 
@@ -122,6 +124,7 @@ export const onCanvasClick = () => chart => {
 };
 
 export const onDeleteKey = () => chart => {
+  console.log("on Delete Key");
   if (chart.selected.type === "node" && chart.selected.id) {
     const node = chart.nodes[chart.selected.id];
     // Delete the connected links
@@ -134,6 +137,7 @@ export const onDeleteKey = () => chart => {
     // Delete the node
     delete chart.nodes[chart.selected.id];
   } else if (chart.selected.type === "link" && chart.selected.id) {
+    console.log("Delete The Link")
     delete chart.links[chart.selected.id];
   }
   if (chart.selected) {
@@ -182,7 +186,6 @@ export const onPortPositionChange = ({
   el,
   nodesEl
 }) => chart => {
-  console.log("Node Position To Change");
   if (nodeToUpdate.size) {
     // rotate the port's position based on the node's orientation prop (angle)
     const center = {

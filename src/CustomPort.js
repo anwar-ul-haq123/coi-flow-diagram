@@ -55,6 +55,10 @@ const CustomPort = React.forwardRef(({ isLinkSelected, isLinkHovered, config, po
       ref={ref}
       port={port}
       active={!config.readonly && (isLinkSelected || isLinkHovered)}
+      onClick={e =>{
+        e.stopPropagation();
+        alert("Clicked")
+      }}
     >
       {port && port.field === "output" && (
         <OutputPort properties={port.properties} />
